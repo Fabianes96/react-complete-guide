@@ -1,0 +1,11 @@
+.form{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;    
+    gap: 15px;
+}
+.form .form-field{
+    display: flex;
+    flex-direction: column;
+}

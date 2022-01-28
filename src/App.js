@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Card } from './components/UI/Card';
+import { UserForm } from './components/Users/UserForm';
+import { UserList } from './components/Users/UserList';
 
 function App() {
+  const users =[
+    {id:'1',username: 'Usuario 1', age: 40}
+  ]
+  const [userArray, setUserArray] = useState(users);
+  const addUser = (newUser)=>{
+    
+    setUserArray((prev)=>{
+      return [...prev,newUser]
+    })
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserForm addUser={addUser}/>
+      <UserList users={userArray} />      
     </div>
   );
 }
