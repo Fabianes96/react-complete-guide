@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Card } from '../UI/Card';
-import './UserForm.css'
+import classes from './UserForm.module.css'
 
 export const UserForm = ({addUser}) => {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredAge, setEnteredAge] = useState('');
-  const onSubmitForm = (e)=>{
+
+  const addUserHandler = (e)=>{
     e.preventDefault()
     if(enteredAge.length!==0 && enteredUsername!==0){
       const formData = {
-        id: Math.random(),
         username: enteredUsername,
+        id: Math.random(),
         age: enteredAge      
       }      
       addUser(formData)
@@ -24,19 +25,13 @@ export const UserForm = ({addUser}) => {
     setEnteredAge(target.value)
   }
   return(
-      <Card>          
-        <form className='form' onSubmit={onSubmitForm}>
-            <div className='form-field'>
-                <label>Username</label>
-                <input type="text" value={enteredUsername} onChange={enteredUsernameHandler} />
-            </div>
-            <div className='form-field'>
-                <label>Age (Years)</label>
-                <input type="number" onChange={enteredAgeHandler} />
-            </div>
-            <div>
-                <button type='submit'>Add User</button>
-            </div>
+      <Card className={classes.input}>          
+        <form onSubmit={addUserHandler}>
+          <label htmlFor='username'>Username</label>
+          <input id="username" type="text" value={enteredUsername} onChange={enteredUsernameHandler} />
+          <label htmlFor='age'>Age (Years)</label>
+          <input id='age' type="number" onChange={enteredAgeHandler} />
+          <button type='submit'>Add User</button>            
         </form>
       </Card>
   )

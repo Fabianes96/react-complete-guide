@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Card } from './components/UI/Card';
 import { UserForm } from './components/Users/UserForm';
 import { UserList } from './components/Users/UserList';
 
