@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from '../UI/Button';
 import { Card } from '../UI/Card';
 import classes from './UserForm.module.css'
 
@@ -8,13 +9,18 @@ export const UserForm = ({addUser}) => {
 
   const addUserHandler = (e)=>{
     e.preventDefault()
-    if(enteredAge.length!==0 && enteredUsername!==0){
+    if(enteredAge.trim().length!==0 && enteredUsername.trim().length!==0){
+      if(+enteredAge < 1){
+        return;
+      }
       const formData = {
         username: enteredUsername,
         id: Math.random(),
         age: enteredAge      
       }      
-      addUser(formData)
+      addUser(formData);
+      setEnteredAge('')
+      setEnteredUsername('')
     }
     
   }
@@ -30,8 +36,8 @@ export const UserForm = ({addUser}) => {
           <label htmlFor='username'>Username</label>
           <input id="username" type="text" value={enteredUsername} onChange={enteredUsernameHandler} />
           <label htmlFor='age'>Age (Years)</label>
-          <input id='age' type="number" onChange={enteredAgeHandler} />
-          <button type='submit'>Add User</button>            
+          <input id='age' type="number" value={enteredAge} onChange={enteredAgeHandler} />
+          <Button type='submit'>Add User</Button>            
         </form>
       </Card>
   )

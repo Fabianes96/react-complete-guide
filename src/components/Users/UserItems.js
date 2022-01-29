@@ -3,8 +3,8 @@ import './UserItem.css'
 
 export const UserItems = ({username, age}) => {
   return(
-    <div className='item'>
-      <span>{`${username} (${age} year old)`}</span>
-    </div>
+    <li>
+      {`${username} (${age} year old)`}
+    </li>
   );
 };
