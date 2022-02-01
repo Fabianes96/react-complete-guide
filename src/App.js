@@ -1,10 +1,14 @@
 import { Header } from "./components/Header/Header";
+import { Meals } from "./components/Meals/Meals";
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Header title="ReactMeals" />
-    </div>
+      <main>
+        <Meals />
+      </main>
+    </>
   );
 }
 
