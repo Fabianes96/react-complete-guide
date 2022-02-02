@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 
 export const CartContext = React.createContext({
   meals: [],
@@ -7,20 +7,36 @@ export const CartContext = React.createContext({
   onRemoveItem: () => {},
 });
 
-export const CartContextPrivider = ({ children }) => {
-  const [meal, setMeal] = useState([]);
+const initialCart ={
+  items:[],
+  totalAmount: 0,
+}
 
-  const addItemHandler = () => {
-    setMeal((prev) => {
-      return [...prev, meal];
-    });
+const cartReducer =(state,action)=>{
+  if(action.payload==="ADD_ITEM"){
+    return {
+      items: [...state,action.item],
+      totalAmount: state.totalAmount + action.item.price * action.item.amount
+    }
+  }
+  return state;
+}
+
+export const CartContextPrivider = ({ children }) => {
+  const [cartState, dispatch] = useReducer(cartReducer,initialCart);
+
+  const addItemHandler = (item) => {
+    dispatch({
+      type: 'ADD_ITEM',
+      item: item
+    })
   };
   const removeItemHandler = () => {};
   return (
     <CartContext.Provider
       value={{
-        meals: meal,
-        amount: 0,
+        meals: cartState.items,
+        totalAmount: cartState.amount,
         onAddItem: addItemHandler,
         onRemoveItem: removeItemHandler,
       }}
