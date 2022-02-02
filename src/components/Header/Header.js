@@ -5,12 +5,12 @@ import { HeaderCartButton } from './HeaderCartButton';
 
 
 
-export const Header = ({title}) => {
+export const Header = ({title, showCart}) => {
   return(
     <header>
       <div className={classes.header}>
         <h2>{title}</h2>
-        <HeaderCartButton />
+        <HeaderCartButton showCart={showCart} />
       </div>
       <div className={classes["main-image"]}> 
         <img src={mealsImage} alt="Restaurant" />

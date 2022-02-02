@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import classes from "./Modal.module.css";
 
-export const Backdrop = () => {
-  return <div className={classes.backdrop}></div>;
+export const Backdrop = ({hideCart}) => {
+  return <div onClick={hideCart} className={classes.backdrop}></div>;
 };
 
 export const ModalOverlay = ({ children }) => {
@@ -13,7 +13,7 @@ export const ModalOverlay = ({ children }) => {
     </div>
   );
 };
-export const Modal = ({children}) => {
+export const Modal = ({hideCart,children}) => {
   const portal = document.getElementById("overlays")
   return (
     <React.Fragment>
@@ -22,7 +22,7 @@ export const Modal = ({children}) => {
       <ModalOverlay>
         {children}
       </ModalOverlay> */}
-      {ReactDOM.createPortal(<Backdrop />, portal)}
+      {ReactDOM.createPortal(<Backdrop hideCart={hideCart} />, portal)}
       {ReactDOM.createPortal(<ModalOverlay>{children}</ModalOverlay>, portal)}
     </React.Fragment>
   )
