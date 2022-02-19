@@ -3,8 +3,8 @@ import React, { useReducer, useState } from "react";
 export const CartContext = React.createContext({
   meals: [],
   amount: 0,
-  onAddItem: () => {},
-  onRemoveItem: () => {},
+  onAddItem: (item) => {},
+  onRemoveItem: (id) => {},
 });
 
 const initialCart ={
@@ -13,9 +13,9 @@ const initialCart ={
 }
 
 const cartReducer =(state,action)=>{
-  if(action.payload==="ADD_ITEM"){
+  if(action.type==="ADD_ITEM"){
     return {
-      items: [...state,action.item],
+      items: [...state.items,action.item],
       totalAmount: state.totalAmount + action.item.price * action.item.amount
     }
   }
@@ -25,7 +25,7 @@ const cartReducer =(state,action)=>{
 export const CartContextPrivider = ({ children }) => {
   const [cartState, dispatch] = useReducer(cartReducer,initialCart);
 
-  const addItemHandler = (item) => {
+  const addItemHandler = (item) => {     
     dispatch({
       type: 'ADD_ITEM',
       item: item
