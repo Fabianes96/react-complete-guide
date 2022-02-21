@@ -10,7 +10,12 @@ export const Cart = ({ hideCart }) => {
   const hasItems = cartCtx.meals.length > 0;
 
   const cartItemRemoveHandler = () => {};
-  const cartItemAddHandler = () => {};
+  const cartItemAddHandler = (item) => {
+    cartCtx.onAddItem({
+      ...item,
+      amount:1
+    })
+  };
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
@@ -22,7 +27,7 @@ export const Cart = ({ hideCart }) => {
             amount={item.amount}
             price={item.price}
             onRemove={cartItemRemoveHandler}
-            onAdd={cartItemAddHandler}
+            onAdd={()=>cartItemAddHandler(item)}
           />
         );
       })}
