@@ -13,7 +13,7 @@ const initialCart ={
 }
 
 const cartReducer =(state,action)=>{
-  if(action.type==="ADD_ITEM"){
+  if(action.type==="ADD_ITEM"){   
     return {
       items: [...state.items,action.item],
       totalAmount: state.totalAmount + action.item.price * action.item.amount
@@ -36,7 +36,7 @@ export const CartContextPrivider = ({ children }) => {
     <CartContext.Provider
       value={{
         meals: cartState.items,
-        totalAmount: cartState.amount,
+        amount: cartState.totalAmount,
         onAddItem: addItemHandler,
         onRemoveItem: removeItemHandler,
       }}
