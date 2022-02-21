@@ -9,7 +9,9 @@ export const Cart = ({ hideCart }) => {
   const totalAmount = `$${cartCtx.amount.toFixed(2)}`;
   const hasItems = cartCtx.meals.length > 0;
 
-  const cartItemRemoveHandler = () => {};
+  const cartItemRemoveHandler = (id) => {
+    cartCtx.onRemoveItem(id)
+  };
   const cartItemAddHandler = (item) => {
     cartCtx.onAddItem({
       ...item,
@@ -26,7 +28,7 @@ export const Cart = ({ hideCart }) => {
             name={item.name}
             amount={item.amount}
             price={item.price}
-            onRemove={cartItemRemoveHandler}
+            onRemove={()=>cartItemRemoveHandler(item.id)}
             onAdd={()=>cartItemAddHandler(item)}
           />
         );
