@@ -9,8 +9,14 @@ export const NewQuote = () => {
   const history = useHistory();
 
   useEffect(() => {
+    let isCancelled = false;
     if(status==='completed'){
-      history.push('/quotes');
+      if(!isCancelled){
+        history.push('/quotes');
+      }
+    }
+    return ()=>{
+      isCancelled = true;
     }
   }, [status,history])
   
